@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scholaros"
+version = "0.1.0"
+description = "ScholarOS - AI-powered learning platform"
+authors = [
+    { name = "Abhilash Anand Y" }
+]
+requires-python = ">=3.11"
+
+dependencies = [
+    "typer[all]",
+    "rich",
+    "ollama",
+    "yt-dlp",
+    "youtube-transcript-api",
+    "pymupdf",
+    "lancedb",
+    "pydantic",
+]
+
+[project.scripts]
+scholar = "scholaros.cli.main:app"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["scholaros*"]

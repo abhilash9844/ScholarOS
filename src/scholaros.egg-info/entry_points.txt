@@ -1,0 +1,2 @@
+[console_scripts]
+scholar = scholaros.cli.main:app

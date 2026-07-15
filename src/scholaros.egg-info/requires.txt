@@ -1,0 +1,8 @@
+typer[all]
+rich
+ollama
+yt-dlp
+youtube-transcript-api
+pymupdf
+lancedb
+pydantic
