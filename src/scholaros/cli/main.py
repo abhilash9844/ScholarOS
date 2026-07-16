@@ -1,6 +1,10 @@
 import typer
 from rich import print
 
+from scholaros.transcripts.provider import TranscriptProvider
+from scholaros.generators.notes import generate_notes
+from scholaros.storage.vault import save_note
+
 app = typer.Typer(
     help="ScholarOS - AI Powered Learning Platform"
 )
@@ -17,10 +21,29 @@ def hello():
 
 
 @app.command()
-def ingest(url: str):
+def ingest(
+    url: str,
+    subject: str,
+):
     """Ingest a YouTube video."""
-    print(f"[green]URL:[/green] {url}")
-    print("[yellow]Ingest pipeline started...[/yellow]")
+
+    print("[yellow]Downloading transcript...[/yellow]")
+
+    provider = TranscriptProvider()
+
+    text = provider.get(url)
+
+    print("[cyan]Generating notes...[/cyan]")
+
+    notes = generate_notes(text)
+
+    save_path = save_note(
+        subject,
+        "Lecture Notes",
+        notes,
+    )
+
+    print(f"[bold green]Saved:[/bold green] {save_path}")
 
 
 if __name__ == "__main__":

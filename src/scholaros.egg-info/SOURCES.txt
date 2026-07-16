@@ -27,6 +27,7 @@ src/scholaros/retrieval/__init__.py
 src/scholaros/retrieval/pipeline.py
 src/scholaros/storage/__init__.py
 src/scholaros/storage/database.py
+src/scholaros/storage/vault.py
 src/scholaros/utils/__init__.py
 src/scholaros/utils/helpers.py
 src/scholaros/youtube/__init__.py
