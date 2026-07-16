@@ -143,3 +143,20 @@ Long Term
 - Knowledge Graph
 - Adaptive Revision
 - Mastery Score
+
+## Lesson
+
+The objective is not to summarize lectures.
+
+The objective is to preserve knowledge.
+
+A lecture may briefly introduce concepts that are explained later.
+
+Those concepts must still be captured so the learner has a complete map of the subject.
+
+ScholarOS should distinguish between:
+
+- Covered Concepts
+- Mentioned Concepts
+
+rather than discarding concepts that receive little explanation.

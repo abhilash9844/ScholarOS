@@ -1,4 +1,15 @@
 # ScholarOS Next Priorities
+# Sprint: Knowledge Preservation
+
+Goal:
+ScholarOS should never lose concepts introduced in a lecture.
+
+Tasks:
+
+- Concept Inventory Generator
+- Covered vs Mentioned Concepts
+- Concept Dependency Tree
+- Automatic Knowledge Graph
 
 ## High Priority
 

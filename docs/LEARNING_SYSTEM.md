@@ -23,10 +23,11 @@ Every lecture produces one Knowledge Object.
 
 A Knowledge Object contains:
 
+- Concept Inventory
 - Elite Notes
 - Rapid Revision Kit
 - Flashcards
-- Concept Questions
+- Knowledge Check
 - PYQ-style Questions
 - Challenge Questions
 - Cross Subject Links
@@ -55,6 +56,55 @@ Contains:
 - Cross Subject Links
 
 ---
+# Concept Inventory
+
+Purpose:
+
+ScholarOS should never lose concepts introduced in a lecture.
+
+Every lecture should identify:
+
+## Covered Concepts
+
+Concepts explained in detail.
+
+## Mentioned Concepts
+
+Concepts briefly introduced but explained later.
+
+## Future Concepts
+
+Concepts that will be covered in upcoming lectures.
+
+## Dependencies
+
+Parent-child relationships between concepts.
+
+Example:
+
+Data Representation
+
+├── Numbers
+
+│   ├── Fixed Point
+
+│   ├── Floating Point
+
+│   ├── Unsigned
+
+│   ├── Signed Magnitude
+
+│   ├── One's Complement
+
+│   └── Two's Complement
+
+└── Characters
+
+    ├── ASCII
+
+    └── EBCDIC
+
+ScholarOS should preserve every concept even if it is not explained in the current lecture.
 
 # Rapid Revision Kit
 
