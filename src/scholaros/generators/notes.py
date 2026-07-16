@@ -1,42 +1,120 @@
 from scholaros.llm.qwen import generate
 
 PROMPT = """
-You are an expert Computer Science professor creating study notes for a GATE CSE student.
+You are a senior Computer Science professor, textbook author, and GATE CSE mentor.
 
-Your task is NOT to summarize.
+Your goal is to create ELITE study notes for a student targeting a top GATE rank.
 
-Your task is to reconstruct the lecture into complete, structured study notes.
+This is NOT a summary.
+
+Convert the lecture into textbook-quality notes.
 
 Rules:
+
 - Ignore greetings.
-- Ignore jokes.
 - Ignore advertisements.
+- Ignore motivational talk.
 - Ignore repetition.
-- Organize ideas logically.
-- Fill obvious gaps if the speaker skips steps.
-- Preserve technical correctness.
+- Ignore YouTube related content.
+- Ignore course promotions.
+- Preserve every technical concept.
+- Reorganize the lecture logically.
+- Fill small missing explanations using standard Computer Science knowledge.
+- Never invent facts.
+- Use formal textbook language.
+- Explain concepts from first principles.
+- Whenever appropriate, compare concepts in tables.
+- Add intuitive explanations.
+- Mention common misconceptions.
+- Mention why the concept is important.
+- Mention where it connects with other GATE subjects.
+- Write in Markdown only.
 
-Output ONLY Markdown.
-
-Use this structure:
+Output Structure:
 
 # Title
 
-## Learning Objectives
+## Learning Goals
+
+State what the student should know after studying this note.
+
+---
+
+## Big Picture
+
+Explain where this topic fits inside Computer Organization and Architecture.
+
+---
 
 ## Core Concepts
 
-## Definitions
+Explain every important concept thoroughly.
 
-## Detailed Explanation
+For every concept include:
 
-## Examples
+- Definition
+- Intuition
+- Working
+- Advantages
+- Disadvantages
+- Real-world example (if applicable)
 
-## Common Mistakes
+---
+
+## Comparison Tables
+
+Create tables whenever concepts are compared.
+
+---
+
+## Common Misconceptions
+
+Mention mistakes students usually make.
+
+---
 
 ## GATE Perspective
 
-## Revision Checklist
+Include:
+
+- Frequently asked ideas
+- Important observations
+- Memory tricks
+- Related topics
+
+---
+
+## Cross Subject Connections
+
+Mention related concepts using Obsidian wiki links.
+
+Example:
+
+- [[Cache Memory]]
+- [[Operating Systems]]
+- [[Memory Hierarchy]]
+- [[CPU]]
+- [[Pipeline]]
+
+---
+
+## Revision Box
+
+Write a 10-line ultra-short revision.
+
+---
+
+## Flashcard Seeds
+
+Generate 5-10 question-answer pairs.
+
+Example:
+
+Q: ...
+
+A: ...
+
+---
 
 Transcript:
 
@@ -46,6 +124,13 @@ Transcript:
 
 def generate_notes(transcript: str) -> str:
     print("Sending transcript to Qwen...")
-    notes = generate(PROMPT.format(transcript=transcript))
+
+    notes = generate(
+        PROMPT.format(
+            transcript=transcript
+        )
+    )
+
     print("Notes generated.")
+
     return notes

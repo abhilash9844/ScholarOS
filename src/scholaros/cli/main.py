@@ -2,6 +2,7 @@ import typer
 from rich import print
 
 from scholaros.transcripts.provider import TranscriptProvider
+from scholaros.youtube.cleaner import clean_transcript
 from scholaros.generators.notes import generate_notes
 from scholaros.storage.vault import save_note
 
@@ -24,14 +25,17 @@ def hello():
 def ingest(
     url: str,
     subject: str,
+    lecture: str,
 ):
-    """Ingest a YouTube video."""
+    """
+    Ingest a YouTube video and save notes.
+    """
 
     print("[yellow]Downloading transcript...[/yellow]")
 
     provider = TranscriptProvider()
-
     text = provider.get(url)
+    text = clean_transcript(text)
 
     print("[cyan]Generating notes...[/cyan]")
 
@@ -39,7 +43,7 @@ def ingest(
 
     save_path = save_note(
         subject,
-        "Lecture Notes",
+        lecture,
         notes,
     )
 
