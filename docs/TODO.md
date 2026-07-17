@@ -1,5 +1,12 @@
 # ScholarOS Next Priorities
 # Sprint: Knowledge Preservation
+# Immediate
+
+- [ ] Review ScholarOS architecture
+- [ ] Implement transcript caching
+- [ ] Design generic concept candidate extraction
+- [ ] Separate extraction from organization
+- [ ] Improve transcript preprocessing
 # High Priority
 
 - [ ] Implement transcript caching
