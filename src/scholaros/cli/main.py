@@ -1,10 +1,14 @@
 import typer
 from rich import print
+from scholaros.storage.cache import ensure_cache
 
 from scholaros.transcripts.provider import TranscriptProvider
 from scholaros.youtube.cleaner import clean_transcript
+
+from scholaros.generators.concepts import generate_concepts
 from scholaros.generators.notes import generate_notes
-from scholaros.storage.vault import save_note
+
+from scholaros.storage.vault import save_document
 
 app = typer.Typer(
     help="ScholarOS - AI Powered Learning Platform"
@@ -27,27 +31,41 @@ def ingest(
     subject: str,
     lecture: str,
 ):
-    """
-    Ingest a YouTube video and save notes.
-    """
+    """Ingest a YouTube lecture."""
+    ensure_cache()
 
     print("[yellow]Downloading transcript...[/yellow]")
 
     provider = TranscriptProvider()
-    text = provider.get(url)
-    text = clean_transcript(text)
 
-    print("[cyan]Generating notes...[/cyan]")
+    transcript = provider.get(url)
 
-    notes = generate_notes(text)
+    transcript = clean_transcript(transcript)
 
-    save_path = save_note(
+    print("[cyan]Generating Concept Inventory...[/cyan]")
+
+    concepts = generate_concepts(transcript)
+
+    save_document(
         subject,
         lecture,
+        "01 - Concept Inventory",
+        concepts,
+    )
+
+    print("[cyan]Generating Elite Notes...[/cyan]")
+
+    notes = generate_notes(transcript)
+
+    save_document(
+        subject,
+        lecture,
+        "02 - Elite Notes",
         notes,
     )
 
-    print(f"[bold green]Saved:[/bold green] {save_path}")
+    print()
+    print("[bold green]Knowledge Object Created Successfully![/bold green]")
 
 
 if __name__ == "__main__":

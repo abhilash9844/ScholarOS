@@ -1,6 +1,5 @@
 from pathlib import Path
 
-# Change this later to your actual Obsidian vault
 VAULT_PATH = Path.home() / "Documents" / "ScholarOSVault"
 
 
@@ -10,25 +9,52 @@ def ensure_vault():
 
 def list_subjects():
     ensure_vault()
-    return sorted([p.name for p in VAULT_PATH.iterdir() if p.is_dir()])
+    return sorted(
+        p.name for p in VAULT_PATH.iterdir()
+        if p.is_dir()
+    )
 
 
 def create_subject(name: str):
-    subject_path = VAULT_PATH / name
-    subject_path.mkdir(parents=True, exist_ok=True)
-    return subject_path
+    path = VAULT_PATH / name
+    path.mkdir(parents=True, exist_ok=True)
+    return path
 
 
-def save_note(subject: str, title: str, content: str):
+def create_lecture(subject: str, lecture: str):
     subject_path = create_subject(subject)
 
-    # Make filename filesystem-safe
-    safe_title = "".join(
-        c for c in title if c not in r'<>:"/\|?*'
+    lecture_path = subject_path / lecture
+
+    lecture_path.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    return lecture_path
+
+
+def save_document(
+    subject: str,
+    lecture: str,
+    filename: str,
+    content: str,
+):
+    lecture_path = create_lecture(
+        subject,
+        lecture,
+    )
+
+    safe_name = "".join(
+        c for c in filename
+        if c not in r'<>:"/\|?*'
     ).strip()
 
-    note_path = subject_path / f"{safe_title}.md"
+    path = lecture_path / f"{safe_name}.md"
 
-    note_path.write_text(content, encoding="utf-8")
+    path.write_text(
+        content,
+        encoding="utf-8",
+    )
 
-    return note_path
+    return path
