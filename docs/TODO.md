@@ -1,5 +1,19 @@
 # ScholarOS Next Priorities
 # Sprint: Knowledge Preservation
+# High Priority
+
+- [ ] Implement transcript caching
+- [ ] Redesign transcript preprocessing
+- [ ] Improve deterministic term extraction
+- [ ] Support transcript file input
+- [ ] Merge deterministic extraction with LLM reasoning
+
+# Medium Priority
+
+- [ ] OCR pipeline
+- [ ] Knowledge graph
+- [ ] Textbook integration
+- [ ] Flashcard generation improvements
 
 Goal:
 ScholarOS should never lose concepts introduced in a lecture.

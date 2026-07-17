@@ -1,7 +1,8 @@
 import typer
 from rich import print
+from scholaros.transcripts.preprocessor import preprocess
 from scholaros.storage.cache import ensure_cache
-
+from scholaros.extraction.technical_terms import extract_terms
 from scholaros.transcripts.provider import TranscriptProvider
 from scholaros.youtube.cleaner import clean_transcript
 
@@ -36,15 +37,28 @@ def ingest(
 
     print("[yellow]Downloading transcript...[/yellow]")
 
-    provider = TranscriptProvider()
+    from pathlib import Path
 
-    transcript = provider.get(url)
+    transcript = Path(
+       "sample_data/lecture01.txt"
+         ).read_text(
+          encoding="utf-8"
+)
 
     transcript = clean_transcript(transcript)
 
+    transcript = preprocess(transcript)
+    print("\n========== CLEANED TRANSCRIPT ==========\n")
+    print(transcript[:3000])
+    print("\n========================================\n")
+
     print("[cyan]Generating Concept Inventory...[/cyan]")
 
-    concepts = generate_concepts(transcript)
+    terms = "\n".join(
+    extract_terms(transcript)
+)
+
+    concepts = generate_concepts(terms)
 
     save_document(
         subject,

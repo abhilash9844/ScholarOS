@@ -1,63 +1,69 @@
 from scholaros.llm.qwen import generate
 
 PROMPT = """
-You are an information extraction system.
+You are an expert Computer Science curriculum designer.
 
-Your task is NOT to summarize.
-Your task is NOT to teach.
-Your task is NOT to complete the syllabus.
+You are given a list of technical terms that were extracted from a lecture.
 
-Your ONLY job is to extract concepts that explicitly appear in the transcript.
+Do NOT invent new terms.
+
+Use ONLY the supplied terms.
+
+Your job is to organize them into a Concept Inventory.
 
 Rules:
 
-- NEVER invent concepts.
-- NEVER add concepts from your own knowledge.
-- NEVER predict future topics.
-- NEVER complete hierarchies using outside knowledge.
-- Every concept in the output must be traceable to the transcript.
-- Ignore greetings.
-- Ignore advertisements.
-- Ignore motivational speech.
-- Ignore course promotion.
+- NEVER add concepts.
+- NEVER remove concepts.
+- NEVER rename concepts.
+- NEVER use outside knowledge.
 
-Output ONLY markdown.
+If you cannot determine whether a concept was explained or merely mentioned,
+place it under "Mentioned Today".
+
+If no relationship can be confidently determined,
+leave it under an "Unclassified" section.
+
+Output ONLY Markdown.
+
+Format:
 
 # Concept Inventory
 
 ## Explained Today
 
-List only concepts that were actually explained.
+...
 
 ---
 
 ## Mentioned Today
 
-List concepts that were mentioned but not explained.
+...
 
 ---
 
 ## Relationships Found
 
-Create a hierarchy ONLY when the relationship is explicitly stated by the lecturer.
+...
 
-If no hierarchy exists in the transcript, do not invent one.
+---
 
-If you are unsure whether a concept appeared,
-DO NOT include it.
+## Unclassified
 
-Transcript:
+...
 
-{transcript}
+Technical Terms:
+
+{terms}
 """
 
 
-def generate_concepts(transcript: str) -> str:
-    print("Generating Concept Inventory...")
+def generate_concepts(terms: str) -> str:
+    print("Building Concept Inventory...")
 
     concepts = generate(
         PROMPT.format(
-            transcript=transcript
+            terms=terms
         )
     )
 

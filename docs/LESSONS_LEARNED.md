@@ -160,3 +160,16 @@ ScholarOS should distinguish between:
 - Mentioned Concepts
 
 rather than discarding concepts that receive little explanation.
+# Lesson
+
+Prompt engineering alone is insufficient for reliable concept extraction.
+
+Use deterministic extraction for identifying concepts.
+
+Use LLMs for organization, explanation, and reasoning.
+
+Separate extraction from generation.
+
+Repeated transcript downloads during development cause YouTube rate limiting.
+
+Development should use cached transcripts instead of repeatedly requesting YouTube.
